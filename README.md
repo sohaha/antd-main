@@ -1,5 +1,19 @@
 # 后台基座
 
+## 开发
+
+### 拉取代码
+
+```bash
+# 连同 lib 仓库一起拉取
+git clone --recursive https://github.com/sohaha/antd-main
+
+# 或拉取当前项目之后再拉取 lib 仓库
+git clone https://github.com/sohaha/antd-main
+cd antd-main
+git submodule update --init --recursive
+```
+
 ## 部署
 
 ### Nginx Config
