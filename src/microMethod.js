@@ -1,6 +1,7 @@
 import router from '@/router';
 import { findPageListIndex } from '@/router/util';
-import { parseFullPath, log } from '@/utils/util';
+import { parseFullPath } from '@/utils/util';
+import { log } from '@/lib/debug';
 import store from '@/store';
 
 // noticeState => options: {from: '', to: '', ...}

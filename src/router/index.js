@@ -75,17 +75,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { parseRoutes } from './util';
+import { log } from '@/lib/debug';
 import store from '@/store';
 import components, { wrapRoutes } from './register';
 
 Vue.use(Router);
 
 function initRouter() {
-  const routes = wrapRoutes([]);
-  return new Router({
-    mode: 'history',
-    routes: parseRoutes(routes, components),
-  });
+    const routes = wrapRoutes([]);
+    return new Router({
+        mode: 'history',
+        routes: parseRoutes(routes, components),
+    });
 }
 
 const router = initRouter();
@@ -93,12 +94,10 @@ const router = initRouter();
 export default router;
 
 router.beforeEach((to, from, next) => {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('%c Go ', 'background:#ECEEF1;color:#117F51', from.path, '->', to.path);
-  }
-  if (!to?.meta?.public && !store.state.token) {
-    next('/login');
-    return;
-  }
-  next();
+    log('Goto: ', from.path, '->', to.path);
+    if (!to?.meta?.public && !store.state.token) {
+        next('/login');
+        return;
+    }
+    next();
 });

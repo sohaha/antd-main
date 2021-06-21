@@ -12,6 +12,22 @@ git clone --recursive https://github.com/sohaha/antd-main
 git clone https://github.com/sohaha/antd-main
 cd antd-main
 git submodule update --init --recursive
+
+# 更新 lib 仓库，直接进入 src/lib
+cd src/lib
+git pull
+```
+
+### 安装依赖
+
+```
+npm install
+```
+
+### 启动项目
+
+```
+npm run serve
 ```
 
 ## 部署

@@ -4,14 +4,12 @@ import { loadInterceptors } from '@/lib/axios';
 import { axios, handle } from '@/utils/request';
 import store from '@/store';
 import methods, { notice } from './microMethod';
-import Vue from 'vue';
 
 export const actions = initGlobalState({
   method: '',
   from: '',
   to: '',
   options: {},
-  appsState: {},
 });
 
 actions.onGlobalStateChange((state, prev) => {
@@ -49,17 +47,6 @@ export function loadMicroApp(name, micro, props) {
 }
 
 export default function bootstrap({ router, store, message }) {
-  Vue.prototype.$microNotice = (to, data) => {
-    const state = {
-      method: 'notice',
-      options: {
-        from: router.currentRoute.fullPath,
-        to,
-        data,
-      },
-    };
-    setGlobalState(state);
-  };
   loadInterceptors(axios, handle,{ router, store, message });
   loadRoutes();
 }

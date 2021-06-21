@@ -20,7 +20,9 @@ views.keys().forEach(key => {
   };
 });
 
-console.log('%c Pages ', 'background:#aaa;color:#D33682', Object.keys(viewblock));
+if (process.env.NODE_ENV !== 'production') {
+  console.log('%c Pages ', 'background:#aaa;color:#D33682', Object.keys(viewblock));
+}
 
 export function loadRoutes(routes) {
   let routesConfig = routes;

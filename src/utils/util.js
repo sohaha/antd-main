@@ -1,11 +1,5 @@
 import enquireJs from 'enquire.js';
 
-export function log(...logs) {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('%c Go ', 'background:#ECEEF1;color:#FCCB33', ...logs);
-  }
-}
-
 export function parseFullPath(href) {
   return href.replace(new RegExp(location.origin, 'g'), '');
 }
