@@ -44,6 +44,12 @@ export default {
     this.nextMicro();
     this.updateActive();
   },
+  destroyed() {
+    const apps = this.apps;
+    Object.keys(apps).forEach(key => {
+      apps[key].single.unmount();
+    });
+  },
   methods: {
     updateActive() {
       const status = this.$store.state.setting['appsState'];
