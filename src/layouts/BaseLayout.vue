@@ -1,6 +1,10 @@
 <template>
   <admin-layout>
-    <contextmenu :item-list="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
+    <contextmenu
+      :item-list="menuItemList"
+      :visible.sync="menuVisible"
+      @select="onMenuSelect"
+    />
     <tabs-head
       v-if="multiPage"
       :active="activePage"
@@ -10,10 +14,17 @@
       @refresh="refresh"
       @contextmenu="onContextmenu"
     />
-    <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
+    <div
+      :class="['tabs-view-content', layout, pageWidth]"
+      :style="`margin-top: ${multiPage ? -24 : 0}px`"
+    >
       <micro />
       <page-layout>
-        <z-keep-alive v-if="multiPage && cachePage" v-model="clearCaches" :exclude-keys="excludeKeys">
+        <z-keep-alive
+          v-if="multiPage && cachePage"
+          v-model="clearCaches"
+          :exclude-keys="excludeKeys"
+        >
           <router-view v-if="!refreshing" ref="tabContent" :key="$route.path" />
         </z-keep-alive>
         <router-view v-else-if="!refreshing" ref="tabContent" />
@@ -35,7 +46,14 @@ import layoutMixin from '@/utils/layoutMixin';
 
 export default {
   name: 'BaseView',
-  components: { Micro, PageLayout, TabsHead, Contextmenu, AdminLayout, ZKeepAlive },
+  components: {
+    Micro,
+    PageLayout,
+    TabsHead,
+    Contextmenu,
+    AdminLayout,
+    ZKeepAlive,
+  },
   mixins: [layoutMixin],
   data() {
     return {
@@ -58,7 +76,14 @@ export default {
     tabsOffset() {
       return this.multiPage ? 24 : 0;
     },
-    ...mapState('setting', ['multiPage', 'cachePage', 'animate', 'layout', 'pageWidth', 'pageList']),
+    ...mapState('setting', [
+      'multiPage',
+      'cachePage',
+      'animate',
+      'layout',
+      'pageWidth',
+      'pageList',
+    ]),
   },
   methods: {
     changePage(key) {
@@ -83,7 +108,8 @@ export default {
         if (next) {
           this.$router.push(next);
         } else if (key === this.activePage) {
-          index = index >= this.pageList.length ? this.pageList.length - 1 : index;
+          index =
+            index >= this.pageList.length ? this.pageList.length - 1 : index;
           this.activePage = this.pageList[index].fullPath;
           this.$router.push(this.activePage);
         }
@@ -130,9 +156,13 @@ export default {
       }
     },
     closeOthers(pageKey) {
-      const clearPages = this.pageList.filter(item => item.fullPath !== pageKey && !item.unclose);
+      const clearPages = this.pageList.filter(
+        item => item.fullPath !== pageKey && !item.unclose
+      );
       this.clearCaches = clearPages.map(item => item.cachedKey);
-      this.setPageList(this.pageList.filter(item => !clearPages.includes(item)));
+      this.setPageList(
+        this.pageList.filter(item => !clearPages.includes(item))
+      );
       if (this.activePage !== pageKey) {
         this.activePage = pageKey;
         this.$router.push(this.activePage);
@@ -140,9 +170,13 @@ export default {
     },
     closeLeft(pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey);
-      const clearPages = this.pageList.filter((item, i) => i < index && !item.unclose);
+      const clearPages = this.pageList.filter(
+        (item, i) => i < index && !item.unclose
+      );
       this.clearCaches = clearPages.map(item => item.cachedKey);
-      this.setPageList(this.pageList.filter(item => !clearPages.includes(item)));
+      this.setPageList(
+        this.pageList.filter(item => !clearPages.includes(item))
+      );
       if (!this.pageList.find(item => item.fullPath === this.activePage)) {
         this.activePage = pageKey;
         this.$router.push(this.activePage);
@@ -150,9 +184,13 @@ export default {
     },
     closeRight(pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey);
-      const clearPages = this.pageList.filter((item, i) => i > index && !item.unclose);
+      const clearPages = this.pageList.filter(
+        (item, i) => i > index && !item.unclose
+      );
       this.clearCaches = clearPages.map(item => item.cachedKey);
-      this.setPageList(this.pageList.filter(item => !clearPages.includes(item)));
+      this.setPageList(
+        this.pageList.filter(item => !clearPages.includes(item))
+      );
       if (!this.pageList.find(item => item.fullPath === this.activePage)) {
         this.activePage = pageKey;
         this.$router.push(this.activePage);
@@ -183,8 +221,10 @@ export default {
         fullPath: route.fullPath,
         loading: false,
         path: route.path,
-        title: route.meta && route.meta.page ? route.meta.page.title : route.name,
-        unclose: route.meta && route.meta.page && route.meta.page.closable === false,
+        title:
+          route.meta && route.meta.page ? route.meta.page.title : route.name,
+        unclose:
+          route.meta && route.meta.page && route.meta.page.closable === false,
       });
     },
     ...mapMutations('setting', [

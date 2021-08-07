@@ -19,7 +19,9 @@
     />
     <div
       v-if="fixedSideBar && !isMobile"
-      :style="`width: ${sideMenuWidth}; min-width: ${sideMenuWidth};max-width: ${sideMenuWidth};`"
+      :style="
+        `width: ${sideMenuWidth}; min-width: ${sideMenuWidth};max-width: ${sideMenuWidth};`
+      "
       class="virtual-side"
     />
     <drawer v-if="!hideSetting" v-model="showSetting" placement="right">
@@ -32,7 +34,13 @@
     </drawer>
     <a-layout class="admin-layout-main beauty-scroll">
       <admin-header
-        :class="[{ 'fixed-tabs': fixedTabs, 'fixed-header': isFixedHeader, 'multi-page': multiPage }]"
+        :class="[
+          {
+            'fixed-tabs': fixedTabs,
+            'fixed-header': isFixedHeader,
+            'multi-page': multiPage,
+          },
+        ]"
         :style="headerStyle"
         :menu-data="headMenuData"
         :collapsed="collapsed"
@@ -40,7 +48,14 @@
       />
       <a-layout-header
         v-show="isFixedHeader"
-        :class="['virtual-header', { 'fixed-tabs': fixedTabs, 'fixed-header': isFixedHeader, 'multi-page': multiPage }]"
+        :class="[
+          'virtual-header',
+          {
+            'fixed-tabs': fixedTabs,
+            'fixed-header': isFixedHeader,
+            'multi-page': multiPage,
+          },
+        ]"
       />
       <a-layout-content
         class="admin-layout-content"
@@ -94,7 +109,12 @@ export default {
       'hideSetting',
       'multiPage',
     ]),
-    ...mapGetters('setting', ['firstMenu', 'subMenu', 'menuData', 'isFixedHeader']),
+    ...mapGetters('setting', [
+      'firstMenu',
+      'subMenu',
+      'menuData',
+      'isFixedHeader',
+    ]),
     minHeight() {
       return window.innerHeight - 64 - (this.showFooter ? 122 : 24);
     },
@@ -106,7 +126,9 @@ export default {
     },
     headerStyle() {
       const width =
-        this.isFixedHeader && this.layout !== 'head' && !this.isMobile ? `calc(100% - ${this.sideMenuWidth})` : '100%';
+        this.isFixedHeader && this.layout !== 'head' && !this.isMobile
+          ? `calc(100% - ${this.sideMenuWidth})`
+          : '100%';
       const position = this.isFixedHeader ? 'fixed' : 'static';
       return `width: ${width}; position: ${position};`;
     },

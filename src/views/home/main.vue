@@ -1,5 +1,9 @@
 <template>
-  <a-spin class="new-page" :style="`min-height: ${minHeight}px`" :spinning="spinning">
+  <a-spin
+    class="new-page"
+    :style="`min-height: ${minHeight}px`"
+    :spinning="spinning"
+  >
     <h1>首页</h1>
     <h3 v-if="$root.noticeState.length === 0">这是一个普通页面</h3>
     <h3 v-else>{{ $root.noticeState }}</h3>

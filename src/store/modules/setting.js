@@ -4,7 +4,9 @@ import { formatFullPath } from '@/utils/i18n';
 import { getLocalSetting } from '@/utils/theme';
 
 const localSetting = getLocalSetting(true);
-const customTitlesStr = sessionStorage.getItem(process.env.VUE_APP_TBAS_TITLES_KEY);
+const customTitlesStr = sessionStorage.getItem(
+  process.env.VUE_APP_TBAS_TITLES_KEY
+);
 const customTitles = (customTitlesStr && JSON.parse(customTitlesStr)) || [];
 
 export default {

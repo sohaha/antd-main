@@ -4,6 +4,7 @@ import { loadInterceptors } from '@/lib/axios';
 import { axios, handle } from '@/utils/request';
 import store from '@/store';
 import methods, { notice } from './microMethod';
+import Vue from 'vue';
 
 export const actions = initGlobalState({
   method: '',
@@ -47,6 +48,9 @@ export function loadMicroApp(name, micro, props) {
 }
 
 export default function bootstrap({ router, store, message }) {
-  loadInterceptors(axios, handle,{ router, store, message });
+  loadInterceptors(axios, handle, { router, store, message });
   loadRoutes();
 }
+
+// todo 可以考虑把子应用方法注入到 Vue 原型中
+Vue.prototype.$microGoto = methods.goto;

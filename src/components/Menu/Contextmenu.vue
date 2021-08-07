@@ -1,5 +1,11 @@
 <template>
-  <a-menu v-show="visible" class="contextmenu" :style="style" :selected-keys="selectedKeys" @click="handleClick">
+  <a-menu
+    v-show="visible"
+    class="contextmenu"
+    :style="style"
+    :selected-keys="selectedKeys"
+    @click="handleClick"
+  >
     <a-menu-item v-for="item in itemList" :key="item.key">
       <a-icon v-if="item.icon" :type="item.icon" />
       <span>{{ item.text }}</span>
@@ -42,11 +48,12 @@ export default {
   created() {
     window.addEventListener('click', this.closeMenu);
     window.addEventListener('contextmenu', this.setPosition);
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('click', this.closeMenu);
+      window.removeEventListener('contextmenu', this.setPosition);
+    });
   },
-  beforeDestroy() {
-    window.removeEventListener('click', this.closeMenu);
-    window.removeEventListener('contextmenu', this.setPosition);
-  },
+  beforeDestroy() {},
   methods: {
     closeMenu() {
       this.$emit('update:visible', false);

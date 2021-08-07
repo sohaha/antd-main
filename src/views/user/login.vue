@@ -2,13 +2,18 @@
   <common-layout>
     <div class="top">
       <div class="header">
-        <img alt="logo" class="logo" src="@/assets/img/logo.png" > <span class="title">{{ systemName }}</span>
+        <img alt="logo" class="logo" src="@/assets/img/logo.png" >
+        <span class="title">{{ systemName }}</span>
       </div>
       <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
     </div>
     <div class="login">
       <a-form :form="form" @submit="onSubmit">
-        <a-tabs size="large" :tab-bar-style="{ textAlign: 'center' }" style="padding: 0 2px;">
+        <a-tabs
+          size="large"
+          :tab-bar-style="{ textAlign: 'center' }"
+          style="padding: 0 2px;"
+        >
           <a-tab-pane key="1" tab="账户密码登录">
             <a-alert
               v-if="error"
@@ -21,7 +26,18 @@
             />
             <a-form-item>
               <a-input
-                v-decorator="['name', { rules: [{ required: true, message: '请输入账户名', whitespace: true }] }]"
+                v-decorator="[
+                  'name',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请输入账户名',
+                        whitespace: true,
+                      },
+                    ],
+                  },
+                ]"
                 autocomplete="autocomplete"
                 size="large"
                 placeholder="账户名"
@@ -33,7 +49,18 @@
             </a-form-item>
             <a-form-item>
               <a-input
-                v-decorator="['password', { rules: [{ required: true, message: '请输入密码', whitespace: true }] }]"
+                v-decorator="[
+                  'password',
+                  {
+                    rules: [
+                      {
+                        required: true,
+                        message: '请输入密码',
+                        whitespace: true,
+                      },
+                    ],
+                  },
+                ]"
                 size="large"
                 placeholder="密码"
                 autocomplete="autocomplete"
@@ -63,7 +90,12 @@
                   </a-input>
                 </a-col>
                 <a-col :span="8" style="padding-left: 4px">
-                  <a-button style="width: 100%" class="captcha-button" size="large">获取验证码</a-button>
+                  <a-button
+                    style="width: 100%"
+                    class="captcha-button"
+                    size="large"
+                    >获取验证码</a-button
+                  >
                 </a-col>
               </a-row>
             </a-form-item>
@@ -172,7 +204,8 @@ export default {
       .title {
         font-size: 33px;
         color: @title-color;
-        font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica,
+          sans-serif;
         font-weight: 600;
         position: relative;
         top: 2px;

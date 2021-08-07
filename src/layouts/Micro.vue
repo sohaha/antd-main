@@ -1,7 +1,18 @@
 <template>
   <div>
-    <a-spin v-for="(v, key) in apps" v-show="v.show" :key="key" size="large" :spinning="v.loading" :delay="200">
-      <div :id="key" class="new-page" :style="`min-height: ${minHeight}px;padding:0;`" />
+    <a-spin
+      v-for="(v, key) in apps"
+      v-show="v.show"
+      :key="key"
+      size="large"
+      :spinning="v.loading"
+      :delay="200"
+    >
+      <div
+        :id="key"
+        class="new-page"
+        :style="`min-height: ${minHeight}px;padding:0;`"
+      />
     </a-spin>
   </div>
 </template>

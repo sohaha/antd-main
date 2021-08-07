@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+// const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
 const { getThemeColors, modifyVars } = require('./src/utils/theme');
 const isProd = process.env.NODE_ENV === 'production';
@@ -37,6 +38,21 @@ module.exports = {
       })
     );
     config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+    // config.externals = {
+    //   Vue: 'vue',
+    // };
+    // config.plugins.push(
+    //   new HtmlWebpackExternalsPlugin({
+    //     externals: [
+    //       {
+    //         module: 'vue',
+    //         entry:
+    //           '//cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.runtime.min.js',
+    //         global: 'Vue',
+    //       },
+    //     ],
+    //   })
+    // );
   },
   chainWebpack: config => {
     if (isProd) {
